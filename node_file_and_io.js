@@ -13,34 +13,46 @@ class Visitor {
     
     
 save() {
-    let writeData={
-    read: fs.writeFile("visitor_"+this.fullName+".json", JSON.stringify(this, null , 2), function response(err,success) {
-        if(err){l
-            throw "Information not saved"
-        }else{
-           success;
+
+    fs.writeFile("visitor_"+ this.fullName +".json", JSON.stringify(this, null, 2), (err) => {
+        if(err) {
+            throw("Your information is not saved")
+        }else {
+        console.log("Successfully saved your information");
         }
-        
-        })
-}
+    })
 }
                                                                                                                                                                                              
-load() {
-
-    let readData ={
-
-  write: fs.readFile("visitor_"+this.fullName+".json", (err, jsonString)=>{
+ load(){
+  fs.readFile("visitor_"+this.fullName+".json", (err, visitorData)=> {
       if (err) {
-          console.log("File read failed:", err)
-          return
+          throw err
+          
+      } else {
+      visitorData = JSON.parse(visitorData)
+      console.log(visitorData)
       }
-      jsonString = JSON.parse(jsonString)
-      console.log("File data:", jsonString)
   })
-    }
-    }
+}
 }
 
-let romeo = new Visitor("Romeo Mamonong", 25, "12 January 2020", "13:23", "The visit was perfect", "Kurtlin Hendricks") 
-romeo.save()
+
+let ofentse = new Visitor("Ofentse Sambo", 
+                          25, 
+                          "22 September 2019", 
+                          "12:54", 
+                          "Everything was just fine and the stuff was friendly", 
+                          "Teboho Lekhalo"
+                        );
+
+let sbongile = new Visitor("Sbongile Vilakazi", 
+                        25, 
+                        "12 May 2019", 
+                        "12:54", 
+                        "The person who assisted me was rude", 
+                        "Kurtlin Hendricks"
+                      );
+
+ofentse.save()
+sbongile.save()
 module.exports= Visitor;
