@@ -16,40 +16,62 @@ describe("Visitor", ()=>{
                           "Kurtlin Hendricks"
                         );
     
-    it("should check if save() has been called and is defined", ()=>{
+    it("should check if save() is defined", ()=>{
         
 
         expect(ofentse.save).toBeDefined()
     })
 
-    it("should check if save() has been called and is defined", ()=>{
+    it("should check if load()  is defined", ()=>{
         
         ofentse.load()
         sbongile.load()
         expect(ofentse.load).toBeDefined()
     })
 
-    it("should read Ofentse Sambo data", ()=>{
-        let fs = require("fs");
-        let ofentse = new Visitor("Ofentse Sambo")
-        fs.readFile("visitor_"+ofentse.fullName+".json", (err, data)=>{
-      if (err) {
-        throw err;
-      } else {
-        let visitorData = JSON.parse(data)
-       expect(visitorData.fullName).toBe("Ofentse Sambo")
-       expect(visitorData.age).toBe(25)
-       expect(visitorData.dateOfVisit).toBe("22 September 2019")
-       expect(visitorData.timeOfVisit).toBe("12:54")
-       expect(visitorData.comments).toBe("Everything was just fine and the stuff was friendly")
-       expect(visitorData.VisitorAssistedBy).toBe("Teboho Lekhalo")
-            }
-        })
+    it("ahould throw file exist error", ()=> {
+
+      expect(function() {
+        ofentse.save()
+      }).toThrow("File already exists")
     })
+    
+    it("should should throw Error", ()=> {
+      let john = new Visitor("John Cena")
+      
+  expect(()=> {john.load()}).toThrow(Error("File doesn't exist"))
+})
 })
 
-   
+describe("Visitor", () => {
+const fs = require('fs')
+  let merriam = new Visitor("Merriam Montsho",
+                            44, 
+                            "22 December 2019", 
+                            "14:24", 
+                            "Everything was just fine and the stuff was friendly", 
+                            "Teboho Lekhalo")
+  it("should test data in JSON file", () => {
+  
 
-    // describe("")
+    fs.readFile('visitor_Merriam Montsho.json','utf-8', (err, data) => {
+      
+          if(err){
+            throw "File doesn't exist"
+        }else{
+        expect(
+          {
+            "fullName": "Merriam Montsho",
+            "age": 44,
+            "dateOfVisit": "22 December 2019",
+            "timeOfVisit": "14:24",
+            "comments": "Everything was just fine and the stuff was friendly",
+            "VisitorAssistedBy": "Teboho Lekhalo"
+          }).toBe(JSON.stringify(data))
+        }
+      })
+    })
 
+
+  })
 
