@@ -52,15 +52,15 @@ describe("Visitor", () => {
 
 
   beforeEach(() => {
-    merriam.save()
+    fs.unlink('visitor_Merriam Montsho.json', (err) => {
+      if(err){
+        throw Error(err);
+      }
+    })
   })
 
-  afterEach(() => {
-    fs.unlinkSync('visitor_Merriam Montsho.json')
-  })
-
-  it("should test data in JSON file", () => {
-  merriam.save()
+  it("should test data in JSON file", async () => {
+  await merriam.save()
 
     fs.readFile('visitor_Merriam Montsho.json','utf-8', (err, data) => {
       
