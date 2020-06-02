@@ -1,4 +1,5 @@
 let Visitor = require("../node_file_and_io");
+let fs
 
 describe("Visitor", ()=>{
     let ofentse = new Visitor("Ofentse Sambo", 
@@ -29,18 +30,14 @@ describe("Visitor", ()=>{
         expect(ofentse.load).toBeDefined()
     })
 
-    it("ahould throw file exist error", ()=> {
-
+    it("ahould throw file doesn't exit", ()=> {
+      let John = new Visitor(
+        "John Cena"
+      )
       expect(function() {
-        ofentse.save()
-      }).toThrow("File already exists")
+        John.load()
+      }).toThrow(Error("File doesn't exist"))
     })
-    
-    it("should should throw Error", ()=> {
-      let john = new Visitor("John Cena")
-      
-  expect(()=> {john.load()}).toThrow(Error("File doesn't exist"))
-})
 })
 
 describe("Visitor", () => {
@@ -52,7 +49,7 @@ const fs = require('fs')
                             "Everything was just fine and the stuff was friendly", 
                             "Teboho Lekhalo")
   it("should test data in JSON file", () => {
-  
+  merriam.save()
 
     fs.readFile('visitor_Merriam Montsho.json','utf-8', (err, data) => {
       
@@ -67,7 +64,7 @@ const fs = require('fs')
             "timeOfVisit": "14:24",
             "comments": "Everything was just fine and the stuff was friendly",
             "VisitorAssistedBy": "Teboho Lekhalo"
-          }).toBe(JSON.stringify(data))
+          }).toEqual(JSON.parse(data))
         }
       })
     })

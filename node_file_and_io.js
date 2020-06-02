@@ -12,9 +12,9 @@ class Visitor {
 
     save() {
         let path = "visitor_" + this.fullName + ".json";
-        if (fs.existsSync(path)) {
-            throw "File already exists";
-        }
+        // if (fs.existsSync(path)) {
+        //     throw "File already exists";
+        // }
 
         fs.writeFile(path, JSON.stringify(this, null, 2), err => {
             if (err) {
