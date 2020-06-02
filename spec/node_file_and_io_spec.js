@@ -1,4 +1,4 @@
-let Visitor = require("../node_file_and_io");
+let Visitor = require("../src/node_file_and_io");
 let fs
 
 describe("Visitor", ()=>{
