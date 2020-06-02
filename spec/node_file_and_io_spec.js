@@ -41,13 +41,24 @@ describe("Visitor", ()=>{
 })
 
 describe("Visitor", () => {
-const fs = require('fs')
+
+  const fs = require('fs')
   let merriam = new Visitor("Merriam Montsho",
                             44, 
                             "22 December 2019", 
                             "14:24", 
                             "Everything was just fine and the stuff was friendly", 
                             "Teboho Lekhalo")
+
+
+  beforeEach(() => {
+    merriam.save()
+  })
+
+  afterEach(() => {
+    fs.unlinkSync('visitor_Merriam Montsho.json')
+  })
+
   it("should test data in JSON file", () => {
   merriam.save()
 
