@@ -40,7 +40,7 @@ class Visitor {
             } catch (err) {
                 throw err;
             }
-            console.log(data);
+           return data;
         });
     }
 }

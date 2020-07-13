@@ -1,5 +1,4 @@
 let Visitor = require("../src/node_file_and_io");
-let fs
 
 describe("Visitor", ()=>{
     let ofentse = new Visitor("Ofentse Sambo", 
@@ -50,17 +49,8 @@ describe("Visitor", () => {
                             "Everything was just fine and the stuff was friendly", 
                             "Teboho Lekhalo")
 
-
-  beforeEach(() => {
-    fs.unlink('visitor_Merriam Montsho.json', (err) => {
-      if(err){
-        throw Error(err);
-      }
-    })
-  })
-
   it("should test data in JSON file", async () => {
-  await merriam.save()
+    await merriam.save()
 
     fs.readFile('visitor_Merriam Montsho.json','utf-8', (err, data) => {
       
@@ -80,6 +70,10 @@ describe("Visitor", () => {
       })
     })
 
-
+    fs.unlink('visitor_Merriam Montsho.json', (err) => {
+      if(err){
+        throw Error(err);
+      }
+    })
   })
 
